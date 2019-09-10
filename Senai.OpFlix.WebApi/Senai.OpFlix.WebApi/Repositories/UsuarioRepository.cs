@@ -12,7 +12,6 @@ namespace Senai.OpFlix.WebApi.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        //private string StringConexao = "Data Source=.\\SqlExpress; initial catalog=M_OpFlix; User Id=sa;Pwd=132";
 
 
         

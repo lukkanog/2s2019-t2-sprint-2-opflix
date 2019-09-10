@@ -16,6 +16,7 @@ namespace Senai.OpFlix.WebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //mvc
             services.AddMvc()
                .AddJsonOptions
                (
@@ -47,10 +48,11 @@ namespace Senai.OpFlix.WebApi
 
                     ValidIssuer = "OpFlix.WebApi",
 
-                    ValidAudience = "opFlix.WebApi"
+                    ValidAudience = "OpFlix.WebApi"
                 };
             });
 
+            //swagger
             services.AddSwaggerGen(c =>
             c.SwaggerDoc("v1",
             new Swashbuckle.AspNetCore.Swagger.Info
