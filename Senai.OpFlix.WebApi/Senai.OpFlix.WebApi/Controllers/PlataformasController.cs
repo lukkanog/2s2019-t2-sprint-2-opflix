@@ -23,7 +23,7 @@ namespace Senai.OpFlix.WebApi.Controllers
             PlataformaRepository = new PlataformaRepository();
         }
 
-        [Authorize]
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpGet]
         public IActionResult Listar()
         {
