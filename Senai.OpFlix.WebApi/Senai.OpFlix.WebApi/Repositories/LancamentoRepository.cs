@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Senai.OpFlix.WebApi.Domains;
 using Senai.OpFlix.WebApi.Interfaces;
+using Senai.OpFlix.WebApi.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,28 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        public List<Lancamentos> Filtrar(FiltroViewModel filtro)
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                if (filtro.Data == null || filtro.Data == DateTime.Parse("0001-01-01"))
+                {
+                    var plataformaBuscada = ctx.Plataformas.FirstOrDefault(x => x.Nome.Equals(filtro.NomePlataforma));
+
+                    return ctx.Lancamentos.Where(x => x.IdPlataformaNavigation == plataformaBuscada).ToList();
+
+                } else if (string.IsNullOrEmpty(filtro.NomePlataforma))
+                {
+                    return ctx.Lancamentos.Where(x => x.DataLancamento == filtro.Data).ToList();
+                }
+                else
+                {
+                    return ctx.Lancamentos.Where(x => x.DataLancamento == filtro.Data && x.IdPlataformaNavigation.Nome == filtro.NomePlataforma).ToList();
+                }
+
+            }
+        }
+
         public List<Lancamentos> Listar()
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -83,6 +106,6 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
-
+        
     }//#############################################################################################################################
 }

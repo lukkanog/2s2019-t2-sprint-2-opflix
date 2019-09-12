@@ -9,9 +9,18 @@ namespace Senai.OpFlix.WebApi.Interfaces
 {
     interface IUsuarioRepository
     {
-        //string StringConexao { get; set; }
-
+        /// <summary>
+        /// Busca um usuário de acordo com o email e senha passados
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns>Usuário buscado</returns>
         Usuarios BuscarPorEmailESenha(LoginViewModel login);
+
+        /// <summary>
+        /// Cadastra um novo usuário no banco de dados
+        /// </summary>
+        /// <param name="usuario">usuário</param>
         void Cadastrar(Usuarios usuario);
+        
     }
 }

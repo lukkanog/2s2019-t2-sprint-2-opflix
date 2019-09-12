@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Senai.OpFlix.WebApi.Domains;
 using Senai.OpFlix.WebApi.Interfaces;
 using Senai.OpFlix.WebApi.Repositories;
+using Senai.OpFlix.WebApi.ViewModels;
 
 namespace Senai.OpFlix.WebApi.Controllers
 {
@@ -86,6 +88,14 @@ namespace Senai.OpFlix.WebApi.Controllers
                 return BadRequest(new { Mensagem = $"Ocorreu o seguinte erro:{ex.Message}" });
             }
         }
+
+        [Authorize]
+        [HttpPost("filtrar")]
+        public IActionResult Filtrar(FiltroViewModel filtro)
+        {
+            return Ok(LancamentoRepository.Filtrar(filtro));
+        }
+
 
     }//#############################################################################################################################
 }

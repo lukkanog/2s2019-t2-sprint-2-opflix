@@ -13,6 +13,5 @@ namespace Senai.OpFlix.WebApi.Domains
         public int IdLancamento { get; set; }
         public Lancamentos Lancamento { get; set; }
 
-
     }
 }

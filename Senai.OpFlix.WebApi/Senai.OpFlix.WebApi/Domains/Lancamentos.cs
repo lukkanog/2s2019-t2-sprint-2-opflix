@@ -10,7 +10,9 @@ namespace Senai.OpFlix.WebApi.Domains
         [Required(ErrorMessage = "O lançamento deve ter uma categoria vinculada.")]
         public int IdCategoria { get; set; }
         public int IdTipoLancamento { get; set; }
+        [Required(ErrorMessage = "O lançamento deve ter um título.")]
         public string Titulo { get; set; }
+        [Required(ErrorMessage = "O lançamento deve ter uma sinopse.")]
         public string Sinopse { get; set; }
         public int? IdPlataforma { get; set; }
         [Required(ErrorMessage = "O lançamento deve ter uma data de lançamento.")]
