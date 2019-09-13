@@ -27,7 +27,7 @@ namespace Senai.OpFlix.WebApi
 
                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
-            // configurar autenticacao
+            //authentication
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = "JwtBearer";
@@ -61,6 +61,12 @@ namespace Senai.OpFlix.WebApi
                 Version = "v1"
             })
             );
+
+            //CORS (Cross origin resource sharing)
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +83,7 @@ namespace Senai.OpFlix.WebApi
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "OpFlix API V1");
             });
+            app.UseCors("CorsPolicy");
         }
     }
 }

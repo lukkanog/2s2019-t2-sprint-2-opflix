@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.OpFlix.WebApi.Domains;
 using Senai.OpFlix.WebApi.Repositories;
+using Senai.OpFlix.WebApi.Interfaces;
 
 namespace Senai.OpFlix.WebApi.Controllers
 {
@@ -79,6 +80,11 @@ namespace Senai.OpFlix.WebApi.Controllers
                 int idUsuario = int.Parse(usuario.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
                 favorito.IdUsuario = idUsuario;
                 favorito.IdLancamento = idLancamento;
+
+                if (FavoritoRepository.FavoritoJaFoiCadastrado(favorito) == false)
+                {
+                    return BadRequest(new { Mensagem = "Esse lançamento não é um favorito seu!"});
+                }
 
                 FavoritoRepository.Desfavoritar(favorito);
 

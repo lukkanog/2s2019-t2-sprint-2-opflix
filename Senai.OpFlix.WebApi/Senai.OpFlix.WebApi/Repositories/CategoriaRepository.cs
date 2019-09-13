@@ -10,7 +10,7 @@ namespace Senai.OpFlix.WebApi.Repositories
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        private string StringConexao = "Data Source=.\\SqlExpress; initial catalog=M_OpFlix; User Id=sa;Pwd=132";
+        private const string StringConexao = "Data Source=.\\SqlExpress; initial catalog=M_OpFlix; User Id=sa;Pwd=132";
 
 
         public void Atualizar(Categorias categoria)

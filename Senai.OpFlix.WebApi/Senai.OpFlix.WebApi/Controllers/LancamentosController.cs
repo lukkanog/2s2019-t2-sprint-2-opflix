@@ -32,6 +32,12 @@ namespace Senai.OpFlix.WebApi.Controllers
             return Ok(LancamentoRepository.Listar());
         }
 
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult BuscarPorId(int id)
+        {
+            return Ok(LancamentoRepository.BuscarPorId(id));
+        }
 
         [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPost]
@@ -47,6 +53,7 @@ namespace Senai.OpFlix.WebApi.Controllers
                 return BadRequest(new { Mensagem = $"Ocorreu o seguinte erro:{ex.Message}" });
             }
         }
+
 
         [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPut("{id}")]
@@ -88,6 +95,7 @@ namespace Senai.OpFlix.WebApi.Controllers
                 return BadRequest(new { Mensagem = $"Ocorreu o seguinte erro:{ex.Message}" });
             }
         }
+
 
         [Authorize]
         [HttpPost("filtrar")]
