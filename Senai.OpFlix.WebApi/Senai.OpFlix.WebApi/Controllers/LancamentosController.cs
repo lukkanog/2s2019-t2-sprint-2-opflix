@@ -98,7 +98,7 @@ namespace Senai.OpFlix.WebApi.Controllers
 
 
         [Authorize]
-        [HttpPost("filtrar")]
+        [HttpGet("filtrar")]
         public IActionResult Filtrar(FiltroViewModel filtro)
         {
             return Ok(LancamentoRepository.Filtrar(filtro));

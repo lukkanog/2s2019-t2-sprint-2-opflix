@@ -642,18 +642,21 @@
 				},
 				{
 					"name": "Lancamentos.Filtrar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYUBlbWFpbC5jb20iLCJqdGkiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU5JU1RSQURPUiIsImV4cCI6MTU2ODMzNjA3OCwiaXNzIjoiT3BGbGl4LldlYkFwaSIsImF1ZCI6Ik9wRmxpeC5XZWJBcGkifQ.juS7HsV6Yle8MhFRVH1vovEhleL7mruKdDZfLyYKL_k",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYUBlbWFpbC5jb20iLCJqdGkiOiIzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU5JU1RSQURPUiIsImV4cCI6MTU2ODc1OTYxMiwiaXNzIjoiT3BGbGl4LldlYkFwaSIsImF1ZCI6Ik9wRmxpeC5XZWJBcGkifQ.P8l7OsPHeAS23B26sCfs-yN0_RVt3PCGVqSJsWnYIaU",
 									"type": "string"
 								}
 							]
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
