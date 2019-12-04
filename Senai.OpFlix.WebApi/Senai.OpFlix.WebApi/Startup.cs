@@ -65,7 +65,11 @@ namespace Senai.OpFlix.WebApi
             //CORS (Cross origin resource sharing)
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
             });
         }
 
@@ -78,12 +82,12 @@ namespace Senai.OpFlix.WebApi
             }
 
             app.UseAuthentication();
-            app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "OpFlix API V1");
             });
             app.UseCors("CorsPolicy");
+            app.UseMvc();
         }
     }
 }

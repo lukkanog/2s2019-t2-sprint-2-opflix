@@ -19,13 +19,17 @@ namespace Senai.OpFlix.WebApi.Controllers
     public class LancamentosController : ControllerBase
     {
         private ILancamentoRepository LancamentoRepository { get; set; }
+        private ILocalizacaoRepository LocalizacaoRepository { get; set; }
+
+
 
         public LancamentosController()
         {
             LancamentoRepository = new LancamentoRepository();
+            LocalizacaoRepository = new LocalizacaoRepository();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public IActionResult Listar()
         {
@@ -45,6 +49,13 @@ namespace Senai.OpFlix.WebApi.Controllers
         {
             try
             {
+
+                //if (location != null)
+                //{
+                //    location.TituloLancamento = lancamento.Titulo;
+                //    LocalizacaoRepository.Cadastrar(location);
+                //}
+
                 LancamentoRepository.Cadastrar(lancamento);
                 return Ok(new { Mensagem = "Lançamento cadastrado com sucesso" });
             }
@@ -98,7 +109,7 @@ namespace Senai.OpFlix.WebApi.Controllers
 
 
         [Authorize]
-        [HttpGet("filtrar")]
+        [HttpPost("filtrar")]
         public IActionResult Filtrar(FiltroViewModel filtro)
         {
             return Ok(LancamentoRepository.Filtrar(filtro));

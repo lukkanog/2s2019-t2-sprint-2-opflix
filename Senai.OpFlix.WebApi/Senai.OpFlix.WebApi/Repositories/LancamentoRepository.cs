@@ -38,7 +38,7 @@ namespace Senai.OpFlix.WebApi.Repositories
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                var lancamento = ctx.Lancamentos.Find(id);
+                var lancamento = ctx.Lancamentos.Include(x => x.IdCategoriaNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoLancamentoNavigation).FirstOrDefault(x => x.IdLancamento == id);
                 if (lancamento == null)
                     return null;
                 return lancamento;
@@ -94,7 +94,7 @@ namespace Senai.OpFlix.WebApi.Repositories
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                var lista =  ctx.Lancamentos.Include(x => x.IdCategoriaNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoLancamentoNavigation).ToList();
+                var lista =  ctx.Lancamentos.Include(x => x.IdCategoriaNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoLancamentoNavigation).OrderByDescending(x => x.IdLancamento).ToList();
 
                 foreach (var item in lista)
                 {

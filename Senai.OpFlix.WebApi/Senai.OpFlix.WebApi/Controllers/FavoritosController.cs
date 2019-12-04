@@ -32,6 +32,7 @@ namespace Senai.OpFlix.WebApi.Controllers
             {
                 var usuario = HttpContext.User;
                 int idUsuario = int.Parse(usuario.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
+
                 favorito.IdUsuario = idUsuario;
 
                 if (FavoritoRepository.FavoritoJaFoiCadastrado(favorito) == true)
@@ -89,6 +90,23 @@ namespace Senai.OpFlix.WebApi.Controllers
                 FavoritoRepository.Desfavoritar(favorito);
 
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Mensagem = $"Ocorreu o seguinte erro:{ex.Message}" });
+            }
+        }
+
+        [Authorize]
+        [HttpGet("ids")]
+        public IActionResult ListarIdentificacoes()
+        {
+            try
+            {
+                var usuario = HttpContext.User;
+                int idUsuario = int.Parse(usuario.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                return Ok(FavoritoRepository.ListarIdsFavoritos(idUsuario));
             }
             catch (Exception ex)
             {

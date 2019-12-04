@@ -71,7 +71,6 @@ namespace Senai.OpFlix.WebApi.Controllers
         {
             try
             {
-                usuario.IdTipoUsuario = 2;
                 UsuarioRepository.Cadastrar(usuario);
                 return Ok();
             }

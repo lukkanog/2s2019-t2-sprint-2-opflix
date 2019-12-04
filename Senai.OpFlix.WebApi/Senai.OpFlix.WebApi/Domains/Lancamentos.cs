@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -30,5 +31,12 @@ namespace Senai.OpFlix.WebApi.Domains
         public Plataformas IdPlataformaNavigation { get; set; }
         public TiposLancamentos IdTipoLancamentoNavigation { get; set; }
         public List<LancamentosFavoritos> LancamentosFavoritos { get; set; }
+
+        //internal Lancamentos Include(Func<object, object> p)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Localizacoes Localizacao { get; set; }
     }
 }

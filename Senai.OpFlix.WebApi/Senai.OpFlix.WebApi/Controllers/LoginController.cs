@@ -38,12 +38,14 @@ namespace Senai.OpFlix.WebApi.Controllers
                     return NotFound(new { Mensagem = $"Email ou senha incorretos."});
                 }
 
-              
+
                 var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, usuario.IdUsuario.ToString()),
-                    new Claim(ClaimTypes.Role,usuario.IdTipoUsuarioNavigation.Nome.ToUpper())
+                    new Claim(ClaimTypes.Role,usuario.IdTipoUsuarioNavigation.Nome.ToUpper()),
+                    new Claim("permissao",usuario.IdTipoUsuarioNavigation.Nome.ToUpper()),
+                    new Claim("nome",usuario.Nome),
                 };
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("opflix-chave-autenticacao"));

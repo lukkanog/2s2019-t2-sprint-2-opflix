@@ -33,5 +33,13 @@ namespace Senai.OpFlix.WebApi.Repositories
         /// </summary>
         /// <param name="favorito">Lançamento favorito já existente</param>
         void Desfavoritar(LancamentosFavoritos favorito);
+
+        /// <summary>
+        /// Lista somente os ids dos lançamentos favoritos do usuario.
+        /// Serve para comparação de ids
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <returns>Lista de IDs</returns>
+        List<LancamentosFavoritos> ListarIdsFavoritos(int idUsuario);
     }
 }
