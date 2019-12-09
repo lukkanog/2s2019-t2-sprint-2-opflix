@@ -19,10 +19,20 @@ namespace Senai.OpFlix.WebApi.Repositories
             var database = client.GetDatabase("m_opflix");
             _localizacoes = database.GetCollection<Localizacoes>("locais");
         }
-        
+
+        public Localizacoes BuscarPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Cadastrar(Localizacoes localizacoes)
         {
             _localizacoes.InsertOne(localizacoes);
+        }
+
+        public void Excluir(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Localizacoes> Listar()

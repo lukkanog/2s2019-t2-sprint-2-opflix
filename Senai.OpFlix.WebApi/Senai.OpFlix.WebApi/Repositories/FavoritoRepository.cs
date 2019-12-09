@@ -23,6 +23,19 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        public void ExcluirRegistrosDeLancamento(int idLancamento)
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                var lista = ctx.LancamentosFavoritos.Where(x => x.IdLancamento == idLancamento).ToList();
+
+                foreach (var item in lista)
+                {
+                    ctx.LancamentosFavoritos.Remove(item);
+                    ctx.SaveChanges();
+                }
+            }
+        }
 
         public void Favoritar(LancamentosFavoritos favorito)
         {

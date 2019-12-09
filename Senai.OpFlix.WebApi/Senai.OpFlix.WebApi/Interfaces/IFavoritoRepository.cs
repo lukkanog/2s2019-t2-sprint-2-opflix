@@ -41,5 +41,11 @@ namespace Senai.OpFlix.WebApi.Repositories
         /// <param name="idUsuario"></param>
         /// <returns>Lista de IDs</returns>
         List<LancamentosFavoritos> ListarIdsFavoritos(int idUsuario);
+
+        /// <summary>
+        /// Exclui todos os registros de favoritos que contenham o lançamento passado como parâmetro. Serve ser utilizado quando este determinado lançamento for ser excluído, evitando assim conflitos de Foreign Key.
+        /// </summary>
+        /// <param name="idLancamento">idLancamento</param>
+        void ExcluirRegistrosDeLancamento(int idLancamento);
     }
 }

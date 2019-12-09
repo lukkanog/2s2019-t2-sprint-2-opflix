@@ -9,6 +9,8 @@ namespace Senai.OpFlix.WebApi.Interfaces
     public interface ILocalizacaoRepository
     {
         void Cadastrar(Localizacoes localizacoes);
+        void Excluir(int id);
+        Localizacoes BuscarPorId(int id);
         List<Localizacoes> Listar();
     }
 }
