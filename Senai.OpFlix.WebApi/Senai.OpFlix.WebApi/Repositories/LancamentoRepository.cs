@@ -11,6 +11,8 @@ namespace Senai.OpFlix.WebApi.Repositories
 {
     public class LancamentoRepository : ILancamentoRepository
     {
+        private const string StringConexao = "Data Source=.\\SqlExpress; initial catalog=M_OpFlix; User Id=sa;Pwd=132";
+
         public void Atualizar(Lancamentos lancamento)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -45,6 +47,27 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
+        public List<Lancamentos> BuscarPorTitulo(string titulo)
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                var lista = ctx.Lancamentos.Include(x => x.IdCategoriaNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoLancamentoNavigation).Where(x => EF.Functions.Like(x.Titulo, $"%{titulo}%")).ToList();
+
+                if (lista != null)
+                {
+                    foreach (var item in lista)
+                    {
+                        item.IdCategoriaNavigation.Lancamentos = null;
+                        item.IdPlataformaNavigation.Lancamentos = null;
+                        item.IdTipoLancamentoNavigation.Lancamentos = null;
+                    }
+                    return lista;
+                }
+
+                return null;
+            }
+        }
+
         public void Cadastrar(Lancamentos lancamento)
         {
             using (OpFlixContext ctx = new OpFlixContext())
@@ -68,33 +91,28 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
-        public List<Lancamentos> Filtrar(FiltroViewModel filtro)
+        public List<Lancamentos> FiltrarPorCategoria(int idCategoria)
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                if (filtro.Data == null || filtro.Data == DateTime.Parse("0001-01-01"))
-                {
-                    var plataformaBuscada = ctx.Plataformas.FirstOrDefault(x => x.Nome.Equals(filtro.NomePlataforma));
+                var lista =  ctx.Lancamentos.Include(x => x.IdCategoriaNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoLancamentoNavigation).Where(x => x.IdCategoria == idCategoria).ToList();
 
-                    return ctx.Lancamentos.Where(x => x.IdPlataformaNavigation == plataformaBuscada).ToList();
-
-                } else if (string.IsNullOrEmpty(filtro.NomePlataforma))
+                foreach (var item in lista)
                 {
-                    return ctx.Lancamentos.Where(x => x.DataLancamento == filtro.Data).ToList();
+                    item.IdCategoriaNavigation.Lancamentos = null;
+                    item.IdPlataformaNavigation.Lancamentos = null;
+                    item.IdTipoLancamentoNavigation.Lancamentos = null;
                 }
-                else
-                {
-                    return ctx.Lancamentos.Where(x => x.DataLancamento == filtro.Data && x.IdPlataformaNavigation.Nome == filtro.NomePlataforma).ToList();
-                }
-
+                return lista;
             }
+
         }
 
-        public List<Lancamentos> Listar()
+        public List<Lancamentos> FiltrarPorPlataforma(int idPlataforma)
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                var lista =  ctx.Lancamentos.Include(x => x.IdCategoriaNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoLancamentoNavigation).OrderByDescending(x => x.IdLancamento).ToList();
+                var lista =  ctx.Lancamentos.Include(x => x.IdCategoriaNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoLancamentoNavigation).Where(x => x.IdPlataforma == idPlataforma).ToList();
 
                 foreach (var item in lista)
                 {
@@ -106,6 +124,22 @@ namespace Senai.OpFlix.WebApi.Repositories
             }
         }
 
-        
+        public List<Lancamentos> Listar()
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                var lista = ctx.Lancamentos.Include(x => x.IdCategoriaNavigation).Include(x => x.IdPlataformaNavigation).Include(x => x.IdTipoLancamentoNavigation).OrderByDescending(x => x.IdLancamento).ToList();
+
+                foreach (var item in lista)
+                {
+                    item.IdCategoriaNavigation.Lancamentos = null;
+                    item.IdPlataformaNavigation.Lancamentos = null;
+                    item.IdTipoLancamentoNavigation.Lancamentos = null;
+                }
+                return lista;
+            }
+        }
+
+
     }//#############################################################################################################################
 }

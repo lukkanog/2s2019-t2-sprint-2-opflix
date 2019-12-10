@@ -41,11 +41,25 @@ namespace Senai.OpFlix.WebApi.Interfaces
         Lancamentos BuscarPorId(int id);
 
         /// <summary>
-        /// Filtra os lançamentos apenas pela data, apenas pela plataforma, ou pelos dois
+        /// Filtra os lançamentos apenas pela categoria determinada
         /// </summary>
-        /// <param name="filtro">FiltroViewModel</param>
-        /// <returns>Lista de lançamentos com os filtros aplicados</returns>
-        List<Lancamentos> Filtrar(FiltroViewModel filtro);
+        /// <param name="idCategoria">IdCategoria</param>
+        /// <returns>Lista de lançamentos da determinada categoria</returns>
+        List<Lancamentos> FiltrarPorCategoria(int idCategoria);
+
+        /// <summary>
+        /// Filtra os lançamentos pela plataforma selecionada
+        /// </summary>
+        /// <param name="idPlataforma"></param>
+        /// <returns>Lista de lançamentos da determinada plataforma</returns>
+        List<Lancamentos> FiltrarPorPlataforma(int idPlataforma);
+
+        /// <summary>
+        /// Busca um lançamento pelo título
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <returns>Um lançamento encontrado ou nulo caso não seja encontrado</returns>
+        List<Lancamentos> BuscarPorTitulo(string titulo);
 
     }
 }

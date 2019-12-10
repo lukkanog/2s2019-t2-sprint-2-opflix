@@ -30,9 +30,10 @@ namespace Senai.OpFlix.WebApi.Repositories
             _localizacoes.InsertOne(localizacoes);
         }
 
-        public void Excluir(int id)
+
+        public void Excluir(string titulo)
         {
-            throw new NotImplementedException();
+           
         }
 
         public List<Localizacoes> Listar()

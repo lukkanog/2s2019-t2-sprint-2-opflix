@@ -108,10 +108,45 @@ namespace Senai.OpFlix.WebApi.Controllers
 
 
         [Authorize]
-        [HttpPost("filtrar")]
-        public IActionResult Filtrar(FiltroViewModel filtro)
+        [HttpGet("filtrar/categoria/{id}")]
+        public IActionResult FiltrarPorCategoria(int id)
         {
-            return Ok(LancamentoRepository.Filtrar(filtro));
+            try
+            {
+                return Ok(LancamentoRepository.FiltrarPorCategoria(id));
+            } catch(Exception ex)
+            {
+                return BadRequest(new { Mensagem = $"Ocorreu o seguinte erro: {ex.Message}"});
+            }
+        }
+
+        [Authorize]
+        [HttpGet("filtrar/plataforma/{id}")]
+        public IActionResult FiltrarPorPlataforma(int id)
+        {
+            try
+            {
+                return Ok(LancamentoRepository.FiltrarPorPlataforma(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Mensagem = $"Ocorreu o seguinte erro: {ex.Message}" });
+            }
+        }
+
+
+        [Authorize]
+        [HttpGet("buscar/{titulo}")]
+        public IActionResult BuscarPorTitulo(string titulo)
+        {
+            try
+            {
+                return Ok(LancamentoRepository.BuscarPorTitulo(titulo));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Mensagem = $"Ocorreu o seguinte erro: {ex.Message}" });
+            }
         }
 
 
